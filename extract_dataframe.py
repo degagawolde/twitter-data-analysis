@@ -34,6 +34,10 @@ class TweetDfExtractor:
         
         self.tweets_list = tweets_list
 
+    def find_lang(self)->list:
+        lang = [tweet['user']['lang']
+         for tweet in self.tweets_list]
+        return lang
     # an example function
     def find_statuses_count(self)->list:
         statuses_count = [tweet['user']['statuses_count']
@@ -62,7 +66,7 @@ class TweetDfExtractor:
         return source
 
     def find_screen_name(self)->list:
-        screen_name = [tweet['entities']['user_mentions']['screen_name']
+        screen_name = [tweet['user']['screen_name']
                        for tweet in self.tweets_list]
         return screen_name
 
@@ -71,16 +75,14 @@ class TweetDfExtractor:
                            for tweet in self.tweets_list]
         return followers_count
     def find_friends_count(self)->list:
-        friends_count = [tweet['user']['freinds_count'] 
+        friends_count = [tweet['user']['friends_count'] 
                          for tweet in self.tweets_list]
         return friends_count
     def is_sensitive(self)->list:
-        try:
-            is_sensitive = [x['possibly_sensitive'] for x in self.tweets_list]
-        except KeyError:
-            is_sensitive = None
-
-        return is_sensitive
+         is_sensitive = [tweet['possibly_sensitive'] if 'possibly_sensitive' in tweet.keys(
+        ) else None for tweet in self.tweets_list]
+         
+         return is_sensitive
 
     def find_favourite_count(self)->list:
         favorite_count = [tweet['favorite_count']
@@ -94,24 +96,23 @@ class TweetDfExtractor:
     def find_hashtags(self)->list:
         hashtags = [tweet['entities']['hashtags']
                     for tweet in self.tweets_list]
+        hashtags = [[ht.get('text') for ht in x] if len(x) else []
+                    for x in hashtags]
         return hashtags
 
     def find_mentions(self)->list:
         mentions = [tweet['entities']['user_mentions']
                     for tweet in self.tweets_list]
+        
+        mentions = [[mention.get('screen_name') for mention in x] if len(
+            x) else [] for x in mentions]
         return mentions
 
+    def find_location(self) -> list:
+        location = [tweet['user']['location']
+                    for tweet in self.tweets_list]
 
-    def find_location(self)->list:
-        try:
-            location = self.tweets_list['user']['location']
-        except TypeError:
-            location = ''
-        
-        return location
-
-    
-        
+        return location 
         
     def get_tweet_df(self, save=False)->pd.DataFrame:
         """required column to be generated you should be creative and add more features"""
@@ -149,6 +150,6 @@ if __name__ == "__main__":
     'original_author', 'screen_count', 'followers_count','friends_count','possibly_sensitive', 'hashtags', 'user_mentions', 'place', 'place_coord_boundaries']
     _, tweet_list = read_json("data/global_twitter_data.json")
     tweet = TweetDfExtractor(tweet_list)
-    tweet_df = tweet.get_tweet_df() 
+    tweet_df = tweet.get_tweet_df(save=True)
 
     # use all defined functions to generate a dataframe with the specified columns above
