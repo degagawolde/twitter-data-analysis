@@ -1,9 +1,10 @@
 # Twitter-Data-Analysis
 
-### So here are the bare minimum requirement for completing this task
-
-1. Use this template to create a repository called Twitter-Data-Analysis in your github account. See ["Creating a repository from a template."](https://docs.github.com/en/articles/creating-a-repository-from-a-template) for more information.
-2. [Download](https://drive.google.com/drive/folders/19G8dmehf9vU0u6VTKGV-yWsQOn3IvPsd) and extract the necessary data and put it in the data directory. The data should not not be added to git tracking.
+### Repository Creation using template
+1. Use the template given in ["Creating a repository from a template."](https://docs.github.com/en/articles/creating-a-repository-from-a-template), I created a repository called Twitter-Data-Analysis.
+2. After that I cloned my repository on my local machine.
+### Data Preparation
+1. After downloading the data from [here](https://drive.google.com/drive/folders/19G8dmehf9vU0u6VTKGV-yWsQOn3IvPsd), I extracted it and get two json file data (global_twitter_data.json, and africa_twitter_data.json)
 3. Create a branch called “bugfix” to fix the bugs in the fix_clean_tweets_dataframe.py and fix_extract_dataframe.py 
 4. In branch “bugfix” use the git mv command to rename fix_clean_tweets_dataframe.py to clean_tweets_dataframe.py and fix_extract_dataframe.py  to extract_dataframe.py 
 5. Fix the bugs on clean_tweets_dataframe.py and extract_dataframe.py 
@@ -19,7 +20,6 @@
 
 
 After Completing this Challenge, you would have explore  
-
 - Unittesting
 - Modular Coding
 - Software Engineering Best Practices
