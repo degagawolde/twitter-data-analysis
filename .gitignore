@@ -1,2 +1,4 @@
 __pycache__/
-data/
+data/africa_twitter_data.json
+data/global_twitter_data.json
+.DS_Store/

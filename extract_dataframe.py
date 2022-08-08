@@ -17,8 +17,7 @@ def read_json(json_file: str)->list:
     
     tweets_data = []
     for tweets in open(json_file,'r'):
-        tweets_data.append(json.loads(tweets))
-    
+        tweets_data.append(json.loads(tweets)) 
     
     return len(tweets_data), tweets_data
 
@@ -142,7 +141,6 @@ class TweetDfExtractor:
             print('File Successfully Saved.!!!')
         
         return df
-
                 
 if __name__ == "__main__":
     # required column to be generated you should be creative and add more features
