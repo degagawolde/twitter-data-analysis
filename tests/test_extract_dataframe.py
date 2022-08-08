@@ -94,7 +94,6 @@ class TestTweetDfExtractor(unittest.TestCase):
     #     self.assertEqual(self.df.find_mentions(), )
 
 
-
 if __name__ == "__main__":
     unittest.main()
 
