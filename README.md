@@ -9,7 +9,7 @@
 2. After that I created a git branch “bugfix” to fix the bugs in the fix_clean_tweets_dataframe.py and fix_extract_dataframe.py. While converting the raw json file to pandas dataframe, we have to use appropriate keywords. Additionally, textblob python library(sentimental analysis tool) is used to generate polarity and subjectivity.
 3. To fix the bugs in clean_tweets_dataframe.py, we have to carefully consider the data type conversion in pandas dataframe. Furthermore, removing or dropping unimportant rows or columns is the purpose of this challenge.
 ***
-### Unit tests and Integration tests
+### Unit tests
 1. First, to avoid pushing large dataset to the github I selected the first 25 tweets from the json file and created another json data 'test_data.json' in the data directory. 
 ***
 ### git commands
