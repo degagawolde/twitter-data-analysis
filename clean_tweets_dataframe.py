@@ -146,6 +146,10 @@ class Clean_Tweets:
         )
 
         return df
+    def clean_resource(self, df:pd.DataFrame)->pd.DataFrame:
+        df['source'] = df['source'].apply(
+            lambda x: x.split('>')[1].split('</')[0])
+        return df
 
     def expand_contractions(self, df: pd.DataFrame) -> pd.DataFrame:
         df['original_text'] = df['original_text'].apply(
@@ -173,6 +177,7 @@ class Clean_Tweets:
         df = self.remove_stopwords(df)
         df = self.rename_column(df)
         df = self.drop_duplicate(df)
+        df = self.clean_resource(df)
         if save_csv:
             df.to_csv("cleaned_tweet_data.csv",index=False)
             print('saved successfully')
