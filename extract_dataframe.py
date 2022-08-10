@@ -34,7 +34,7 @@ class TweetDfExtractor:
         self.tweets_list = tweets_list
 
     def find_lang(self)->list:
-        lang = [tweet['user']['lang']
+        lang = [tweet['lang']
          for tweet in self.tweets_list]
         return lang
     # an example function
