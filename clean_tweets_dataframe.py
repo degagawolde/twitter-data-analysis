@@ -27,7 +27,7 @@ class Clean_Tweets:
         """
         drop duplicate rows
         """
-        df.drop_duplicates(inplace=True)
+        df = df.loc[df.astype(str).drop_duplicates().index]
         return df
     
     def convert_to_datetime(self, df:pd.DataFrame)->pd.DataFrame:
@@ -108,11 +108,11 @@ class Clean_Tweets:
         convert tweet and hashtags to lower case
         """
         df["original_text"] = df["original_text"].str.lower()
-        df["hashtags"] = df["hashtags"].apply(lambda x: (" ".join(x)).lower() if len(x) else None)
+        df["hashtags"] = df["hashtags"].apply(lambda x: [xx.lower() for xx in x] if len(x) else "")
         df["source"] = df["source"].str.lower()
         df["original_author"] = df["original_author"].str.lower()
         df["user_mentions"] = df["user_mentions"].apply(
-            lambda x: (" ".join(x)).lower() if len(x) else None)
+            lambda x:  [xx.lower() for xx in x] if len(x) else "")
         df["place"] = df["place"].str.lower()
 
         return df

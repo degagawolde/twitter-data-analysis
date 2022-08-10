@@ -95,7 +95,7 @@ class TweetDfExtractor:
     def find_hashtags(self)->list:
         hashtags = [tweet['entities']['hashtags']
                     for tweet in self.tweets_list]
-        hashtags = [[ht.get('text') for ht in x] if len(x) else None
+        hashtags = [[ht.get('text') for ht in x] if len(x) else ""
                     for x in hashtags]
         return hashtags
 
@@ -104,13 +104,13 @@ class TweetDfExtractor:
                     for tweet in self.tweets_list]
         
         mentions = [[mention.get('screen_name') for mention in x] if len(
-            x) else None for x in mentions]
+            x) else "" for x in mentions]
         return mentions
 
     def find_location(self) -> list:
         location = [tweet['user']['location']
                     for tweet in self.tweets_list]
-        location = [l if len(l) else None for l in location]
+        location = [l if len(l) else "" for l in location]
         return location
         
     def get_tweet_df(self, save=False)->pd.DataFrame:
