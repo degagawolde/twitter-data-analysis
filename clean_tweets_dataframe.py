@@ -12,7 +12,6 @@ class Clean_Tweets:
     """
     def __init__(self, df:pd.DataFrame):
         self.df = df
-        print('Automation in Action...!!!')
         
     def drop_unwanted_rows(self, df:pd.DataFrame)->pd.DataFrame:
         """
@@ -28,10 +27,9 @@ class Clean_Tweets:
         """
         drop duplicate rows
         """
-        
-        df.drop_duplicates(inplace=True)
-        
+        df = df.loc[df.astype(str).drop_duplicates().index]
         return df
+    
     def convert_to_datetime(self, df:pd.DataFrame)->pd.DataFrame:
         """
         convert column to datetime
@@ -110,10 +108,11 @@ class Clean_Tweets:
         convert tweet and hashtags to lower case
         """
         df["original_text"] = df["original_text"].str.lower()
-        df["hashtags"] = df["hashtags"].str.lower()
+        df["hashtags"] = df["hashtags"].apply(lambda x: [xx.lower() for xx in x] if len(x) else "")
         df["source"] = df["source"].str.lower()
         df["original_author"] = df["original_author"].str.lower()
-        df["user_mentions"] = df["user_mentions"].str.lower()
+        df["user_mentions"] = df["user_mentions"].apply(
+            lambda x:  [xx.lower() for xx in x] if len(x) else "")
         df["place"] = df["place"].str.lower()
 
         return df
@@ -161,7 +160,6 @@ class Clean_Tweets:
     def clean_tweet(self, df: pd.DataFrame, save_csv: bool = False):
         df = self.drop_unwanted_rows(df)
         df = self.remove_non_english_tweets(df)
-        df = self.drop_duplicate(df)
         df = self.convert_to_datetime(df)
         df = self.convert_to_numbers(df)
         df = self.fill_nan(df)
@@ -174,6 +172,7 @@ class Clean_Tweets:
         df = self.to_lower(df)
         df = self.remove_stopwords(df)
         df = self.rename_column(df)
+        df = self.drop_duplicate(df)
         if save_csv:
             df.to_csv("cleaned_tweet_data.csv",index=False)
             print('saved successfully')
