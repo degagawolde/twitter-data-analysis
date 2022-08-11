@@ -2,3 +2,4 @@ __pycache__/
 data/africa_twitter_data.json
 data/global_twitter_data.json
 .DS_Store/
+0.0.18
