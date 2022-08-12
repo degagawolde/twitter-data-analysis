@@ -39,7 +39,7 @@ columns = [
 
 class TestTweetDfExtractor(unittest.TestCase):
     """
-		A class for unit-testing function in the fix_clean_tweets_dataframe.py file
+		A class for unit-testing function in the extract_dataframe.py file
 
 		Args:
         -----
@@ -90,13 +90,17 @@ class TestTweetDfExtractor(unittest.TestCase):
         self.assertEqual(self.df.is_sensitive(), [
                          None, None, None, None, None])
 
+    def test_find_hashtags(self):
+        self.assertEqual(self.df.find_hashtags(), [['City'],['China', 'Taiwan'],
+                                                   ['XiJinping'],['XiJinping'],''])
 
-    # def test_find_hashtags(self):
-    #     self.assertEqual(self.df.find_hashtags(), )
-
-    # def test_find_mentions(self):
-    #     self.assertEqual(self.df.find_mentions(), )
-
+    def test_find_mentions(self):
+        self.assertEqual(self.df.find_mentions(), [['i_ameztoy'],
+                                                   ['IndoPac_Info'],
+                                                   ['ZelenskyyUa'],'',
+                                                   ['ChinaUncensored']])
+    def test_find_lang(self):
+        self.assertEqual(self.df.find_lang(),['en','en','en','en','en'])
 
 if __name__ == "__main__":
     unittest.main()
