@@ -5,7 +5,6 @@ import re
 from nltk.corpus import stopwords
 from sqlalchemy import column
 from wordcloud import STOPWORDS
-import emoji
 class Clean_Tweets:
     """
     The PEP8 Standard AMAZING!!!
