@@ -5,10 +5,9 @@ import plotly.graph_objects as go
 
 from mysql_manager import get_labled_tweets
 from mysql_manager import get_cleaned_tweets
-from utils import get_common_hashtags, get_tweet_words, retweets_polarity
+from utils import get_common_hashtags, get_most_mentioned, most_common_words_in_tweet, retweets_polarity
 from wordcloud import STOPWORDS, WordCloud
 from nltk.corpus import stopwords
-
 
 STOP_WORDS = list(set(stopwords.words('english')).union(['t', 'rt', 'ti', 'vk', 'to',
                                                          'co','dqlw', 'z', 'nd', 'm', 
@@ -53,7 +52,7 @@ labled_df = load_labled_data()
 cleaned_df = load_cleaned_data()
 
 # Notify the reader that the data was successfully loaded.
-data_load_state.text('Loading data...done!')
+data_load_state.text('Loading data...finished!')
 
 if st.checkbox('Show Labled Data'):
     st.subheader('Labled Data')
@@ -63,38 +62,43 @@ if st.checkbox('Show Cleaned Data'):
     st.subheader('Cleaned Data')
     st.dataframe(cleaned_df)
 
-# plot sentiment
-st.subheader('Tweet Sentiments positive VS negative')
-sentiment_ratio = labled_df['score'].value_counts()
-
-
-fig = get_pie_plot(sentiment_ratio.keys(), sentiment_ratio)
-st.plotly_chart(fig)
-
-st.subheader('Hashtags wordcloud')
+st.subheader('Hashtags wordcloud - the most common hashtags')
 hashtags = get_common_hashtags(cleaned_df, len(cleaned_df))
 
 ht_wordcloud = get_wordcloud(hashtags)
 st.image(ht_wordcloud)
+
+st.subheader('UserMentions wordcloud - the most mentioned users')
+mentions = get_most_mentioned(cleaned_df)
+
+mnt_wordcloud = get_wordcloud(mentions)
+st.image(mnt_wordcloud)
+
+tweet_words = most_common_words_in_tweet(cleaned_df)
+print(len(tweet_words))
+tweets_wordcloud = get_wordcloud(tweet_words)
+print(type(tweets_wordcloud))
+st.subheader('Tweet wordcloud - most common words in the tweets')
+st.image(tweets_wordcloud)
 
 # get_tweet_words(cleaned_df)
 st.subheader('Tweet sources')
 st.bar_chart(cleaned_df['source'].value_counts(), height=500)
 
 st.subheader(
-    "The three most common sources are Web, iPhone and Android. And the sentiment from each looks like this")
+    "The 3 most common sources(Web, iPhone and Android).\nAnd the sentiment from each looks like this")
 sources_df = labled_df[labled_df['source'].isin(
-    ["Twitter Web App", "Twitter for Android", "Twitter for iPhone"])]
+    ["twitter web app", "twitter for android", "twitter for iphone"])]
 sources = sources_df.groupby('source')['score'].value_counts()
 fig2 = get_pie_plot(sources.keys(), sources)
 st.plotly_chart(fig2, width=100)
 
-tweet_words = get_tweet_words(cleaned_df)
-print(len(tweet_words))
-tweets_wordcloud = get_wordcloud(tweet_words)
-print(type(tweets_wordcloud))
-st.subheader('Tweet wordcloud')
-st.image(tweets_wordcloud)
+# plot sentiment
+st.subheader('Tweet Sentiments(positive VS negative)')
+sentiment_ratio = labled_df['score'].value_counts()
+
+fig = get_pie_plot(sentiment_ratio.keys(), sentiment_ratio)
+st.plotly_chart(fig)
 
 st.subheader('Retwetted vs non-Retweeted tweets polarity')
 # retweeted, non_retweeted = st.columns(2)

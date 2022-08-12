@@ -102,21 +102,18 @@ class Clean_Tweets:
         df.reset_index(drop=True, inplace=True)
 
         return df
-    # def remove_emojis_special_character(self,df:pd.DataFrame)->pd.DataFrame:
-    #     columns = ['original_text','place']
-    #     for column in columns:
-    #         df[column] =  
-    #     return df
+
     def to_lower(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         convert tweet and hashtags to lower case
         """
         df["original_text"] = df["original_text"].str.lower()
-        df["hashtags"] = df["hashtags"].apply(lambda x: str([xx.lower() for xx in x]) if len(x) else "")
+        df["hashtags"] = df["hashtags"].apply(
+            lambda x: [xx.lower() for xx in x] if len(x) else "")
         df["source"] = df["source"].str.lower()
         df["original_author"] = df["original_author"].str.lower()
         df["user_mentions"] = df["user_mentions"].apply(
-            lambda x:  str([xx.lower() for xx in x]) if len(x) else "")
+            lambda x:  [xx.lower() for xx in x] if len(x) else "")
         df["place"] = df["place"].str.lower()
 
         return df
@@ -132,8 +129,7 @@ class Clean_Tweets:
         my_stopwords = my_stopwords.union(custom_stopwords)
         df["original_text"] = df["original_text"].apply(
             lambda doc: " ".join([word for word in doc.split()
-                                  if word not in my_stopwords])
-        )
+                                  if word not in my_stopwords]))
 
         return df
 

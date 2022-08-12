@@ -26,7 +26,6 @@ BANNER = "="*20
 connections_path = f"mysql+pymysql://{'root'}:{'root#123'}@{'localhost:3306'}/twitter_data"
 engine = create_engine(connections_path)
 
-
 # Create the tables
 def create_tables():
     try:
@@ -48,7 +47,9 @@ def get_data(labled=False):
     print("Got the dataframe")
     cleaner = Clean_Tweets(tweets_df)
     cleand_df = cleaner.clean_tweet(tweets_df)
-   
+    cleand_df['hashtags'] = cleand_df['hashtags'].apply(lambda x: "".join(x))
+    cleand_df['user_mentions'] = cleand_df['user_mentions'].apply(
+        lambda x: "".join(x))
     if labled:
         return cleand_df
 
