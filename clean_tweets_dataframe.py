@@ -5,7 +5,7 @@ import re
 from nltk.corpus import stopwords
 from sqlalchemy import column
 from wordcloud import STOPWORDS
-
+import emoji
 class Clean_Tweets:
     """
     The PEP8 Standard AMAZING!!!
@@ -75,7 +75,8 @@ class Clean_Tweets:
         """
         df['original_text'] = df['original_text'].str.replace(
             "[^a-zA-Z]", " ", regex=True)
-
+        df['place'] = df['place'].str.replace(
+            "[^a-zA-Z0-9]", " ", regex=True)
         return df
     
     def fill_nan(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -102,17 +103,21 @@ class Clean_Tweets:
         df.reset_index(drop=True, inplace=True)
 
         return df
-
+    # def remove_emojis_special_character(self,df:pd.DataFrame)->pd.DataFrame:
+    #     columns = ['original_text','place']
+    #     for column in columns:
+    #         df[column] =  
+    #     return df
     def to_lower(self, df: pd.DataFrame) -> pd.DataFrame:
         """
         convert tweet and hashtags to lower case
         """
         df["original_text"] = df["original_text"].str.lower()
-        df["hashtags"] = df["hashtags"].apply(lambda x: [xx.lower() for xx in x] if len(x) else "")
+        df["hashtags"] = df["hashtags"].apply(lambda x: str([xx.lower() for xx in x]) if len(x) else "")
         df["source"] = df["source"].str.lower()
         df["original_author"] = df["original_author"].str.lower()
         df["user_mentions"] = df["user_mentions"].apply(
-            lambda x:  [xx.lower() for xx in x] if len(x) else "")
+            lambda x:  str([xx.lower() for xx in x]) if len(x) else "")
         df["place"] = df["place"].str.lower()
 
         return df
