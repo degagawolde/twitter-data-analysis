@@ -29,8 +29,7 @@ class TweetDfExtractor:
     ------
     dataframe
     """
-    def __init__(self, tweets_list):
-        
+    def __init__(self, tweets_list): 
         self.tweets_list = tweets_list
 
     def find_lang(self)->list:
