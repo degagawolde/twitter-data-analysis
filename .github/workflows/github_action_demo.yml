@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - "main"
+      - "ci_cd"
   pull_request:
     branches:
       - "main"
@@ -14,14 +15,14 @@ jobs:
     strategy:
       matrix:
         # Run in all these versions of Python
-        python-version: [3.8, 3.9]
+        python-version: [3.9, 3.10]
 
     steps:
         # Checkout the latest code from the repo
       - name: Checkout repo
         uses: actions/checkout@v3
       - name: Extract twitter files
-        run: unzip data/Economic_Twitter_Data.zip -d data/
+        run: unzip data/global_twitter_data.zip -d data/
         # Setup which version of Python to use
       - name: Set Up Python 3.10
         uses: actions/setup-python@v3
