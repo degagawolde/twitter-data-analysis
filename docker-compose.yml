@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+    streamlit-dashboard:
+      build: .
+      links:
+        - db
+      networks:
+        - app-tier
+      ports:
+        - "8501:8501"
+
+    db:
+      image: mysql:5.7
+      ports:
+        - "32000:3306"
+      environment:
+        MYSQL_ROOT_PASSWORD: root#123
+      networks:
+        - app-tier
+
+networks:
+  app-tier:
+    driver: bridge
