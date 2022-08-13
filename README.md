@@ -22,7 +22,7 @@ handled by ****JupyterNotebook/EDA.ipynb****
 ***
 ## Modeling 
 The next step will be modeling to develop a system that can solve the challenge we are facing. Our objective is to perform sentimental analysis and topic modeling. In the first task, we are going to develop a classification algorithm. For the second, we use the unsupervised LDA model. 
-handled by ****SentimentalAnalysis.ipynb and TopicModeling.ipynb****
+handled by ****SentimentalAnalysis.ipynb and TopicModeling.ipynb**** in the JupyterNotebooks
 ## MYSQL Integration
 SQLAlchamy is used with pandas to have a higher level interface to the database. All the database related functionalities is handled by **mysql_manager.py file**
 ## Dashboard
