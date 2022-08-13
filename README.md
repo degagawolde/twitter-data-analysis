@@ -13,13 +13,16 @@ We should first convert the JSON file to DataFrame using pandas python library. 
 
 Missing and None values should be handled. In some cases, we may fill missing values with a reasonable value. But if it is not non-sense to fill these values, they should be dropped.
 
-*** extract_dataframe.py, clean_tweets_dataframe.py,  preprocess_tweets_data.py ***
+**** handled extract_dataframe.py, clean_tweets_dataframe.py,  preprocess_tweets_data.py ****
 
 ## Exploratory Data Analysis(EDA)
 After a clean DataFrame is generated, we should carry out the EDA to get an insight from the data. This insight will help to achieve our objective. In this section, we should be able to explore the statistical relationship between attributes.  For example, we can extract the most common user mentions, the most hashtags, the number of positive and negative sentiments, etc. 
+
+handled by ****JupyterNotebook/EDA.ipynb****
 ***
 ## Modeling 
 The next step will be modeling to develop a system that can solve the challenge we are facing. Our objective is to perform sentimental analysis and topic modeling. In the first task, we are going to develop a classification algorithm. For the second, we use the unsupervised LDA model. 
+****SentimentalAnalysis.ipynb and TopicModeling.ipynb***
 ***
 # MLOps pipeline
 The most important takeaway from the week0 challenge is the MLOps pipeline. MLOps can help automate the steps from Data Engineering to the model deployment Phase. 
