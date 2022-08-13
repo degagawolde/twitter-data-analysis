@@ -23,6 +23,8 @@ handled by ****JupyterNotebook/EDA.ipynb****
 ## Modeling 
 The next step will be modeling to develop a system that can solve the challenge we are facing. Our objective is to perform sentimental analysis and topic modeling. In the first task, we are going to develop a classification algorithm. For the second, we use the unsupervised LDA model. 
 handled by ****SentimentalAnalysis.ipynb and TopicModeling.ipynb****
+## Dashboard
+For this part I used streamlit to show different finding I got from the EDA notebook. In addition there are wordclouds gennerated using hashtags,user mensions and tweet texts.
 ***
 # MLOps pipeline
 The most important takeaway from the week0 challenge is the MLOps pipeline. MLOps can help automate the steps from Data Engineering to the model deployment Phase. 
