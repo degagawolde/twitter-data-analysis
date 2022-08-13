@@ -16,7 +16,6 @@ LABLED_SCHEMA = "labled_schema.sql"
 CLEANED_SCHEMA = "cleaned_schema.sql"
 
 CSV_PATH = "processed_tweet_data.csv"
-BANNER = "="*20
 
 
 # with open("db_cred.json", 'r') as f:
@@ -65,7 +64,6 @@ def insert_data(df: pd.DataFrame, table_name):
             df.to_sql(name=table_name, con=conn,
                       if_exists='replace', index=False)
         print(f"Done inserting to {table_name}")
-        print(BANNER)
     except:
         print("Unable to insert to table")
         print(print_exc())
