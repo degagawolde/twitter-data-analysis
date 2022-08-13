@@ -13,7 +13,7 @@ We should first convert the JSON file to DataFrame using pandas python library. 
 
 Missing and None values should be handled. In some cases, we may fill missing values with a reasonable value. But if it is not non-sense to fill these values, they should be dropped.
 
-**** handled extract_dataframe.py, clean_tweets_dataframe.py,  preprocess_tweets_data.py ****
+****handled extract_dataframe.py, clean_tweets_dataframe.py,  preprocess_tweets_data.py****
 
 ## Exploratory Data Analysis(EDA)
 After a clean DataFrame is generated, we should carry out the EDA to get an insight from the data. This insight will help to achieve our objective. In this section, we should be able to explore the statistical relationship between attributes.  For example, we can extract the most common user mentions, the most hashtags, the number of positive and negative sentiments, etc. 
