@@ -1,20 +1,13 @@
-# For more information, please refer to https://aka.ms/vscode-docker-python
-FROM python:3.10.5
+FROM python:3.10.2
 
-# Keeps Python from generating .pyc files in the container
-ENV PYTHONDONTWRITEBYTECODE=1
+EXPOSE 8501
 
-# Turns off buffering for easier container logging
-ENV PYTHONUNBUFFERED=1
-
-# Install pip requirements
-COPY requirements.txt .
+ADD . /dashboard 
+ADD . /mysql_manager
 
 WORKDIR /dashboard
-COPY . /dashboard
 
 RUN pip3 install --upgrade pip
 RUN pip3 install -r requirements.txt
 RUN python3 -m nltk.downloader stopwords
-
-CMD ["streamlit","run", "dashboard.py"]
+CMD ["streamlit", "run", "dashboard.py"]

@@ -14,6 +14,17 @@ STOP_WORDS = list(set(stopwords.words('english')).union(['t', 'rt', 'ti', 'vk', 
                                                          's', 'kur', 'u', 'o', 'd']).union(STOPWORDS))
 
 st.title('Twitter Data Analysis')
+st.markdown("""
+    This app performs simple global twitter analysis
+    * **Python libraries:** base64, pandas, streamlit
+    * **Data Source:** [Twitter Da]
+            
+            """)
+st.sidebar.header("Actions")
+select_action = st.sidebar.selectbox('Ojective',list(reversed([
+    'Explaratory Data Analysis',
+    'Sentimental Analysis',
+    'Topic Modeling'])))
 
 # Create a text element and let the reader know the data is loading.
 data_load_state = st.text('Loading data...')
@@ -92,6 +103,16 @@ sources_df = labled_df[labled_df['source'].isin(
 sources = sources_df.groupby('source')['score'].value_counts()
 fig2 = get_pie_plot(sources.keys(), sources)
 st.plotly_chart(fig2, width=100)
+
+common_source = st.sidebar.multiselect(
+    'Tweet Source', 
+    [x for x in sources_df['source'].value_counts().keys()], 
+    [y for y in sources_df['source'].value_counts().keys()])
+
+common_source = st.sidebar.multiselect(
+    'Tweet Source',
+    [x for x in sources_df['source'].value_counts().keys()],
+    [y for y in sources_df['source'].value_counts().keys()])
 
 # plot sentiment
 st.subheader('Tweet Sentiments(positive VS negative)')
