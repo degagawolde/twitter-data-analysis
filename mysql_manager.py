@@ -22,7 +22,7 @@ CSV_PATH = "processed_tweet_data.csv"
 #     config = json.load(f)
 
 # Connect to the database
-connections_path = f"mysql+pymysql://{'root'}:{'root#123'}@{'localhost:3306'}/twitter_data"
+connections_path = f"mysql+pymysql://{'root'}:{'root#123'}@{'mysql:3308'}/twitter_data"
 engine = create_engine(connections_path)
 
 # Create the tables
@@ -88,7 +88,6 @@ def get_cleaned_tweets():
         cleand_df = pd.read_sql_table('cleaned_tweets_information', con=conn)
 
         return cleand_df
-
 
 if __name__ == "__main__":
     create_tables()

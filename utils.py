@@ -84,6 +84,7 @@ def get_most_mentioned(cleaned_df):
 
 def get_common_hashtags(cleaned_df, top):
     hashtags = cleaned_df['hashtags'].map(np.array).values
+   
     all_hashtags = []
     for hashtag in hashtags:
         hashtag = hashtag.strip("][").split(",")
