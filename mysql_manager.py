@@ -13,6 +13,8 @@ from preprocess_tweet_data import DataPreparation
 from utils import DataLoader
 from urllib.parse import quote
 
+import streamlit as st
+
 LABLED_SCHEMA = "labled_schema.sql"
 CLEANED_SCHEMA = "cleaned_schema.sql"
 
@@ -82,11 +84,14 @@ def get_table_names():
         return names
 
 
+@st.cache
 def get_labled_tweets():
     with engine.connect() as conn:
         labled_df = pd.read_sql_table('labled_tweets_information', con=conn)
         return labled_df
 
+
+@st.cache
 def get_cleaned_tweets():
     with engine.connect() as conn:
         cleand_df = pd.read_sql_table('cleaned_tweets_information', con=conn)
