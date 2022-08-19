@@ -9,6 +9,9 @@ from utils import get_common_hashtags, get_most_mentioned, most_common_words_in_
 from wordcloud import STOPWORDS, WordCloud
 from nltk.corpus import stopwords
 
+import nltk
+nltk.download('stopwords')
+
 STOP_WORDS = list(set(stopwords.words('english')).union(['t', 'rt', 'ti', 'vk', 'to',
                                                          'co','dqlw', 'z', 'nd', 'm', 
                                                          's', 'kur', 'u', 'o', 'd']).union(STOPWORDS))
