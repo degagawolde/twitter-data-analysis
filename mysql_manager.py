@@ -1,4 +1,5 @@
 import json
+import re
 from pprint import pprint
 from traceback import print_exc
 import pandas as pd
@@ -22,7 +23,7 @@ CSV_PATH = "processed_tweet_data.csv"
 #     config = json.load(f)
 
 # Connect to the database
-connections_path = f"mysql+pymysql://{'root'}:{'root#123'}@{'mysql:3308'}/twitter_data"
+connections_path = "mysql+pymysql://root:root#123@mysql/twitter_data"
 engine = create_engine(connections_path)
 
 # Create the tables
@@ -38,7 +39,6 @@ def create_tables():
         print("Unable to create the Tables")
         print(print_exc())
 
-
 # Read the data
 def get_data(labled=False):
     loader = DataLoader('./', CSV_PATH)
@@ -47,8 +47,14 @@ def get_data(labled=False):
     cleaner = Clean_Tweets(tweets_df)
     cleand_df = cleaner.clean_tweet(tweets_df)
     cleand_df['hashtags'] = cleand_df['hashtags'].apply(lambda x: "".join(x))
+    
+    cleand_df['hashtags'] = cleand_df['hashtags'].str.replace(
+        "[^a-zA-Z0-9]", " ", regex=True)
+    
     cleand_df['user_mentions'] = cleand_df['user_mentions'].apply(
         lambda x: "".join(x))
+    cleand_df['source'] = cleand_df['source'].str.replace(
+        "[^a-zA-Z]", " ", regex=True)
     if labled:
         return cleand_df
 
@@ -79,9 +85,7 @@ def get_table_names():
 def get_labled_tweets():
     with engine.connect() as conn:
         labled_df = pd.read_sql_table('labled_tweets_information', con=conn)
-
         return labled_df
-
 
 def get_cleaned_tweets():
     with engine.connect() as conn:
@@ -92,6 +96,13 @@ def get_cleaned_tweets():
 if __name__ == "__main__":
     create_tables()
     cleand_df, labled_df = get_data()
+    print(cleand_df['hashtags'].iloc[65])
+    print(cleand_df['hashtags'].iloc[66])
+    print(cleand_df['hashtags'].iloc[67])
+    
+    print(labled_df['hashtags'].iloc[65])
+    print(labled_df['hashtags'].iloc[66])
+    print(labled_df['hashtags'].iloc[67])
     print(cleand_df.info())
     print(labled_df.info())
     insert_data(labled_df, "labled_tweets_information")

@@ -11,6 +11,7 @@ certifi
 cffi  
 click==8.1.3
 contractions==0.0.18
+cryptography
 cycler  
 debugpy 
 decorator  
