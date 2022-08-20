@@ -30,9 +30,10 @@ connections_path = "mysql+pymysql://root:root#123@localhost/twitter_data"
 
 @st.cache(allow_output_mutation=True)
 def get_connection():
-    return  create_engine(connections_path)
+    engine = create_engine(connections_path)
+    return  engine.connect()
 
-engine = get_connection()
+engine = create_engine(connections_path)
 
 # Create the tables
 def create_tables():
@@ -91,9 +92,10 @@ def get_table_names():
 
 @st.cache
 def get_labled_tweets():
-    with engine.connect() as conn:
-        labled_df = pd.read_sql_table('labled_tweets_information', con=conn)
-        return labled_df
+    labled_df = pd.read_sql_table(
+            'labled_tweets_information', 
+            con=get_connection())
+    return labled_df
 
 @st.cache
 def get_cleaned_tweets():
