@@ -26,7 +26,13 @@ CSV_PATH = "processed_tweet_data.csv"
 
 # Connect to the database
 connections_path = "mysql+pymysql://root:root#123@localhost/twitter_data"
-engine = create_engine(connections_path)
+
+
+@st.cache(allow_output_mutation=True)
+def get_connection():
+    return  create_engine(connections_path,fast_executemany = True)
+
+engine = get_connection()
 
 # Create the tables
 def create_tables():
@@ -83,13 +89,11 @@ def get_table_names():
         names = inspector.get_table_names()
         return names
 
-
 @st.cache
 def get_labled_tweets():
     with engine.connect() as conn:
         labled_df = pd.read_sql_table('labled_tweets_information', con=conn)
         return labled_df
-
 
 @st.cache
 def get_cleaned_tweets():
