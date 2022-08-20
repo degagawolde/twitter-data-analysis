@@ -107,14 +107,6 @@ def get_cleaned_tweets():
 if __name__ == "__main__":
     create_tables()
     cleand_df, labled_df = get_data()
-    print(cleand_df['hashtags'].iloc[65])
-    print(cleand_df['hashtags'].iloc[66])
-    print(cleand_df['hashtags'].iloc[67])
-    
-    print(labled_df['hashtags'].iloc[65])
-    print(labled_df['hashtags'].iloc[66])
-    print(labled_df['hashtags'].iloc[67])
-    print(cleand_df.info())
-    print(labled_df.info())
+
     insert_data(labled_df, "labled_tweets_information")
     insert_data(cleand_df, "cleaned_tweets_information")
