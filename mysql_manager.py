@@ -30,7 +30,7 @@ connections_path = "mysql+pymysql://root:root#123@localhost/twitter_data"
 
 @st.cache(allow_output_mutation=True)
 def get_connection():
-    return  create_engine(connections_path,fast_executemany = True)
+    return  create_engine(connections_path)
 
 engine = get_connection()
 
