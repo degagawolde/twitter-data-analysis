@@ -2,8 +2,7 @@ name: GitHub Actions Test
 on:
   push:
     branches:
-      # - "main"
-      - "dhub"
+      - "main"
   # pull_request:
   #   branches:
   #     - "main"
