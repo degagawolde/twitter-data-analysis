@@ -25,7 +25,7 @@ CSV_PATH = "processed_tweet_data.csv"
 #     config = json.load(f)
 
 # Connect to the database
-connections_path = "mysql+pymysql://root:root#123@localhost/twitter_data"
+connections_path = "mysql+pymysql://root:root#123@mysql/twitter_data"
 
 
 @st.cache(allow_output_mutation=True)
