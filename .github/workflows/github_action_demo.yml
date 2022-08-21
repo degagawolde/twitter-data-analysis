@@ -39,7 +39,9 @@ jobs:
       - name: Run tests
         run: python -m unittest tests/test*
       - name: Run docker-compose
-        uses: mr-smithers-excellent/docker-build-push@v4
+        run: docker compose up -d
+      - name: push docker image 
+        run: docker image push --all-tags
         with: 
           image: degaga/dashboard
           registry: docker.io
