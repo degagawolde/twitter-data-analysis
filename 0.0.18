@@ -1,0 +1,7 @@
+Collecting contractions
+  Using cached contractions-0.1.72-py2.py3-none-any.whl (8.3 kB)
+Requirement already satisfied: textsearch>=0.0.21 in /Users/user/miniforge3/envs/10A/lib/python3.10/site-packages (from contractions) (0.0.21)
+Requirement already satisfied: pyahocorasick in /Users/user/miniforge3/envs/10A/lib/python3.10/site-packages (from textsearch>=0.0.21->contractions) (1.4.4)
+Requirement already satisfied: anyascii in /Users/user/miniforge3/envs/10A/lib/python3.10/site-packages (from textsearch>=0.0.21->contractions) (0.3.1)
+Installing collected packages: contractions
+Successfully installed contractions-0.1.72
