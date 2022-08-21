@@ -2,11 +2,11 @@ name: GitHub Actions Test
 on:
   push:
     branches:
-      - "main"
-      - "docker"
-  pull_request:
-    branches:
-      - "main"
+      # - "main"
+      - "dhub"
+  # pull_request:
+  #   branches:
+  #     - "main"
 
 jobs:
   test:
