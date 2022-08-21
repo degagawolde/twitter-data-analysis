@@ -38,6 +38,19 @@ jobs:
           pip install -r requirements.txt
       - name: Run tests
         run: python -m unittest tests/test*
+      - name: Run docker-compose
+        run: docker compose up -d
+        # uses: 
+        # with: 
+        #   image: degaga/dashboard
+        #   registry: docker.io
+        #   username: ${{ secrets.DOCKER_USERNAME }}
+        #   password: ${{ secrets.DOCKER_PASSWORD }}
+      #   run: docker compose up -d
+      # - name: Cypress -tests
+      #   uses: cypress-io/github-action@v2
+      #   with: 
+      #     wait-on: 'http://localhost:8501'
       - name: Clean up
         run: rm data/*.json
         
