@@ -48,7 +48,6 @@ jobs:
         with:
           docker_compose: 'docker-compose.yml' # required
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          tag: mytwitter-data:$(date +%s)
 
       - name: Clean up
         run: rm data/*.json
