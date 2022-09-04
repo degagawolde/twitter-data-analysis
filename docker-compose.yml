@@ -6,6 +6,7 @@ services:
       container_name: twitter-analysis
       image: twitter-analysis:myanalysis
       command: sh -c "sleep 10s;python ./mysql_manager.py;streamlit run ./dashboard.py"
+      target: streamlit
       depends_on:
         - mysql
       networks:
