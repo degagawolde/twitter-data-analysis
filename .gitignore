@@ -1,2 +1,9 @@
 __pycache__/
-data/
+.env
+*.json
+*.csv
+*.ipynb_checkpoints
+.DS_Store/
+0.0.18
+data/africa_twitter_data.zip
+# .streamlit

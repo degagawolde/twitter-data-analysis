@@ -1,29 +1,43 @@
+
 # Twitter-Data-Analysis
 
-### So here are the bare minimum requirement for completing this task
+Given filter words, fetches tweets and shows polarity, sentiment scores, topic modeling, and a word map based on the fetched tweets.
 
-1. Use this template to create a repository called Twitter-Data-Analysis in your github account. See ["Creating a repository from a template."](https://docs.github.com/en/articles/creating-a-repository-from-a-template) for more information.
-2. [Download](https://drive.google.com/drive/folders/19G8dmehf9vU0u6VTKGV-yWsQOn3IvPsd) and extract the necessary data and put it in the data directory. The data should not not be added to git tracking.
-3. Create a branch called “bugfix” to fix the bugs in the fix_clean_tweets_dataframe.py and fix_extract_dataframe.py 
-4. In branch “bugfix” use the git mv command to rename fix_clean_tweets_dataframe.py to clean_tweets_dataframe.py and fix_extract_dataframe.py  to extract_dataframe.py 
-5. Fix the bugs on clean_tweets_dataframe.py and extract_dataframe.py 
-6. Multiple times, push the code you are working on to git, and once the fix is complete, merge the fix_bug branch to main branch
-7. Create a new branch called “testing” for updating the unit tests in the test/ folder to be applicable to the code you fixed. 
-    a. Build your unit and integration tests to run on small data (< 1 MB) that you copied from what is provided - avoid pushing large data to github
-    b. Think about the key elements (units can be functions, classes, or modules; multiple of them working together to accomplish a task requires integration testing) of the code base you are working on. Write the following
-      - Unit tests: for individual key functions and classes
-      - Integration tests: for the integration of multiple units working together
-8. After completing the unit and integration tests, merge  the “testing” branch with the main branch
-9. In all cases when you merge, make sure you first do Pull Request, review, then accept the merge.
-10. Use github actions in your repository such that when you git push new code (or merge a branch) to the main branch, the unit test in tests/*.py runs automatically. All tests should pass.
+Twitter is A social media on which enormous data is being generated. Using Twitter Data, it is possible to various analyses on a particular product or entity. So, in this report, we will see step-by-step how to make Twitter data analysis.
 
+## Data Acquisition
 
-After Completing this Challenge, you would have explore  
+The first step should be to understand your problem, what data it requires, and where you could get it. In this case, we can extract Twitter data using the API key provided by the Twitter Company upon request. This data is pulled into JSON format, which is a little bit difficult to be readable by humans.
 
-- Unittesting
-- Modular Coding
-- Software Engineering Best Practices
-- Python Package Structure
-- Bug Fix (Debugging)
+## Data Preparation
 
-Have Fun and Cheers
+We should first convert the JSON file to DataFrame using pandas python library. And then save it as a CSSV file for further use. The typecasting should be performed to get a suitable and sensible data format. Special characters, emojis, and unwanted content should be cleared from the DataFrame. 
+
+Missing and None values should be handled. In some cases, we may fill missing values with a reasonable value. But if it is not non-sense to fill these values, they should be dropped.
+
+****handled extract_dataframe.py, clean_tweets_dataframe.py,  preprocess_tweets_data.py****
+
+## Exploratory Data Analysis(EDA)
+After a clean DataFrame is generated, we should carry out the EDA to get an insight from the data. This insight will help to achieve our objective. In this section, we should be able to explore the statistical relationship between attributes.  For example, we can extract the most common user mentions, the most hashtags, the number of positive and negative sentiments, etc. 
+
+handled by ****JupyterNotebook/EDA.ipynb****
+***
+## Modeling 
+The next step will be modeling to develop a system that can solve the challenge we are facing. Our objective is to perform sentimental analysis and topic modeling. In the first task, we are going to develop a classification algorithm. For the second, we use the unsupervised LDA model. 
+handled by ****SentimentalAnalysis.ipynb and TopicModeling.ipynb**** in the JupyterNotebooks
+## MYSQL Integration
+SQLAlchamy is used with pandas to have a higher level interface to the database. All the database related functionalities is handled by **mysql_manager.py file**
+## Dashboard
+For this part I used streamlit to show different finding I got from the EDA notebook. In addition there are wordclouds gennerated using hashtags,user mensions and tweet texts.
+***
+# MLOps pipeline
+The most important takeaway from the week0 challenge is the MLOps pipeline. MLOps can help automate the steps from Data Engineering to the model deployment Phase. 
+First, the data, the features generated by the data engineering phase, is stored on SQL/NoSQL. We should also register the model parameters and performance. While deployment, we fetch these values from the database and use them. This can also help in versioning the data and model. If there is a data drift, model performance Decay, and requirement change, we can set an alert and retrain the model and do the process from the start again.
+
+## Future Works
+- More test coverage
+- Add logging
+- More and better exception handling
+- More data analysis and modeling
+- Add Model/Data drift detection
+- Integrate model to the dashboard
