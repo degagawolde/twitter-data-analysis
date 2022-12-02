@@ -1,6 +1,8 @@
 
 # Twitter-Data-Analysis
 
+Given filter words, fetches tweets and shows polarity, sentiment scores, topic modeling, and a word map based on the fetched tweets.
+
 Twitter is A social media on which enormous data is being generated. Using Twitter Data, it is possible to various analyses on a particular product or entity. So, in this report, we will see step-by-step how to make Twitter data analysis.
 
 ## Data Acquisition
